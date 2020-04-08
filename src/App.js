@@ -2,6 +2,8 @@ import React , { Component} from 'react';
 import Person from './Person/Person';
 import './App.css';
 
+// import Radium ,{StyleRoot} from 'radium';
+
 class  App extends Component {
   state={
     persons:[
@@ -59,15 +61,22 @@ this.setState({
     }
   
   render() {
+   
     //whithin the render method will be executed everytie 
     //when react render this componennt
+    //if we want to use sudo selecter in inlinestyle , then we have to install the radiu
     const style={
-      backgroungColor:'green',
+      backgroundColor:'green',
       color:'white',
       font:'inherit',
       border:'1px solid blue',
       padding:'8px',
-      cursor:'pointer'
+      cursor:'pointer',
+      // ':hover':{
+      //   backgroundColor:'lightgreen',
+      //   color:'black'
+
+      // }
     };
     let persons=null;
     if(this.state.showPerson){
@@ -84,21 +93,33 @@ this.setState({
         
          </div>
       );
-      style.backgroungColor='red';
+      style.backgroundColor='red';
+     
+     
+
 
     }
 
+   const  classes= [];
+    if(this.state.persons.length<=2){
+      classes.push('red');
+    }
+    if(this.state.persons.length<=1){
+      classes.push('bold');
+    }
     return (
+      
       <div className="App">
         <h1> You have to acheive something</h1>
         <h2>You have enough talend</h2>
-        <h2> Don't waste your life</h2>
+        <h2 className={classes.join(' ')}> Don't waste your life</h2>
         <button 
         style={style}
         onClick={this. togglePersonHandler}>Switch Name</button>
    
  {persons}
      </div>
+     
       
     );
   }
